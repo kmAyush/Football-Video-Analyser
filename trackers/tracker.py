@@ -1,6 +1,7 @@
 from ultralytics import YOLO
 import supervision as sv
 import numpy as np
+import pandas as pd
 import pickle
 import os
 import sys
@@ -13,6 +14,17 @@ class Tracker:
     def __init__(self, model_path):
         self.model = YOLO(model_path)
         self.tracker = sv.ByteTrack()
+    
+    def interpolate_ball_positions(self, ball_positions):
+        ball_positions = [x.get(1,{}).get('bounding_box',[]) for x in ball_positions]
+        df_bp = pd.DataFrame(ball_positions, columns=['x1','y1','x2','y2'])
+
+        df_bp = df_bp.interpolate()
+        df_bp = df_bp.bfill()
+
+        ball_positions = [{1: {"bounding_box":x}} for x in df_bp.to_numpy().tolist()]
+        
+        return ball_positions
     
     def detect_frames(self, frames):
         batch_size = 20
@@ -156,7 +168,8 @@ class Tracker:
 
             # Draw Players
             for track_id, player in player_dict.items():
-                frame = self.draw_ellipse(frame, player["bounding_box"],(0,0,255), track_id)
+                color = player.get("team_color", (200, 99, 56))
+                frame = self.draw_ellipse(frame, player["bounding_box"], color, track_id)
             
             # Draw Referee
             for track_id, referee in referee_dict.items():

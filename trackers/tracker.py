@@ -7,7 +7,7 @@ import os
 import sys
 import cv2
 sys.path.append('../')
-from utils import get_bbox_width, get_center_bbox
+from utils import get_bbox_width, get_center_bbox, get_foot_position
 
 
 class Tracker:
@@ -15,6 +15,17 @@ class Tracker:
         self.model = YOLO(model_path)
         self.tracker = sv.ByteTrack()
     
+    def add_position_to_tracks(self, tracks):
+        for object, object_tracks in tracks.items():
+            for frame_num, track in enumerate(object_tracks):
+                for track_id, track_info in track.items():
+                    bbox = track_info["bounding_box"]
+                    if object == "ball":
+                        position = get_center_bbox(bbox)
+                    else:
+                        position = get_foot_position(bbox)
+                    tracks[object][frame_num][track_id]["position"] = position
+
     def interpolate_ball_positions(self, ball_positions):
         ball_positions = [x.get(1,{}).get('bounding_box',[]) for x in ball_positions]
         df_bp = pd.DataFrame(ball_positions, columns=['x1','y1','x2','y2'])

@@ -3,6 +3,7 @@ from utils import read_video, save_video
 from trackers import Tracker
 from assign_team import AssignTeam
 from assign_ball import AssignPlayerBall
+from camera_movement import CameraMovementEstimator
 import numpy as np
 import cv2
 
@@ -11,8 +12,18 @@ def main():
 
     tracker = Tracker('models/best.pt')
     tracks = tracker.get_object_tracks(video_frames, read_from_stub=True, stub_path='stubs/track_stubs.pkl')
-    # Interpolating ball
 
+    # Get Object Positions
+    tracker.add_position_to_tracks(tracks)
+
+    # Estimating Camera Movement
+    camera_estimate = CameraMovementEstimator(video_frames[0])
+    camera_move_per_frame = camera_estimate.get_camera_movement(video_frames, read_from_stub=True, stub_path='stubs/camera_movement_stub.pkl')
+
+    # Adjust positions to track
+    camera_estimate.add_adjust_positions_to_tracks(tracks, camera_move_per_frame)
+
+    # Interpolating ball
     tracks['ball'] = tracker.interpolate_ball_positions(tracks['ball'])
 
     # Generating Person Image
@@ -50,8 +61,10 @@ def main():
     
     ball_control = np.array(ball_control)
             
-
+    # Draw Annotations
     output_video_frames = tracker.draw_annotations(video_frames, tracks, ball_control)
+    output_video_frames = camera_estimate.draw_camera_movement(output_video_frames, camera_move_per_frame)
+
     save_video(output_video_frames, 'output/output.avi')
 
 if __name__ == '__main__':

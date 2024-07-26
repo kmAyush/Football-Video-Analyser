@@ -6,12 +6,19 @@ from assign_ball import AssignPlayerBall
 from camera_movement import CameraMovementEstimator
 from view_transformer import ViewTransformer
 from motion_estimator import MotionEstimator
+import argparse
 import numpy as np
 import cv2
 
 def main():
-    video_frames = read_video('input/football_sample.mp4')
-
+    parser = argparse.ArgumentParser(description="To add input filepath")
+    parser.add_argument('-f', '--filepath', type=str, help='Input filepath like "input/football_sample.mp4"')
+    args = parser.parse_args()
+    if args.filepath is None:
+        video_frames = read_video('input/football_sample.mp4')
+    else:
+        video_frames = read_video(args.filepath)
+        
     tracker = Tracker('models/best.pt')
     tracks = tracker.get_object_tracks(video_frames, read_from_stub=True, stub_path='stubs/track_stubs.pkl')
 

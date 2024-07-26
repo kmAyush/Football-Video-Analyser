@@ -16,6 +16,33 @@ Features
 * Display player id, speed and distance.
 <br>
 
+How to Run
+------
+1. Git clone this repo
+```
+git clone https://github.com/kmAyush/Football_video_analyser.git
+```
+2. Create a folder "models" and download this <a href = https://huggingface.co/Ayushkm10/Football_video_analyser/blob/main/best.pt>huggingface model</a> save it in that folder.<br>
+3. Install dependencies 
+```
+pip install -r requirements.txt
+```
+4. Run this code
+```
+python3 main.py
+```
+&nbsp;or
+```
+chmod +x main.py
+./main.py
+```
+5. [Optional] Can provide your own file -
+<br>
+
+```
+python3 main.py -f "input/football_sample.mp4"
+```
+
 Methodology
 ------
 Preparing Data

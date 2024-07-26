@@ -1,0 +1,7 @@
+argparse==1.4.0
+ultralytics==8.2.64
+supervision==0.22.0
+opencv-python==4.10.0.84
+numpy
+matplotlib
+pandas

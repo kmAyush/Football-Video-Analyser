@@ -20,8 +20,8 @@ class MotionEstimator():
                     if track_id not in object_tracks[last_frame]:
                         continue
 
-                    start_pos = object_tracks[frame_num][track_id]['position_adjusted']
-                    end_pos = object_tracks[last_frame][track_id]['position_adjusted']
+                    start_pos = object_tracks[frame_num][track_id]['position_transformed']
+                    end_pos = object_tracks[last_frame][track_id]['position_transformed']
 
                     if start_pos is None or end_pos is None:
                         continue
@@ -67,8 +67,8 @@ class MotionEstimator():
                         position[1]+=40
 
                         position = tuple(map(int, position))
-                        cv2.putText(frame, f"{speed:.2f} km/h", position, cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0),2)
-                        cv2.putText(frame, f"{distance:.2f} m", (position[0], position[1]+20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0),2)
+                        cv2.putText(frame, f"{speed:.2f} km/h", position, cv2.FONT_HERSHEY_SIMPLEX, 0.5, (117,30,54), 2)
+                        cv2.putText(frame, f"{distance:.2f} m", (position[0], position[1]+20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (20,20,20), 2)
             output_frames.append(frame)
 
         return output_frames    

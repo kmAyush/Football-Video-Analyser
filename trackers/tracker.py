@@ -170,7 +170,7 @@ class Tracker:
 
     def draw_ball_control(self, frame, frame_num, ball_control):
         overlay = frame.copy()
-        cv2.rectangle(overlay,(1350, 50), (1900, 170), (0, 0, 0), -1)
+        cv2.rectangle(overlay,(1550, 0), (1920, 100), (0, 0, 0), -1)
         alpha = 0.4
         cv2.addWeighted(overlay, alpha, frame, 1-alpha, 0, frame)
         bc_till_frame = ball_control[:frame_num+1]
@@ -181,8 +181,8 @@ class Tracker:
         team1_percent = team1_count_bc/(team1_count_bc+team2_count_bc)
         team2_percent = team2_count_bc/(team1_count_bc+team2_count_bc)
 
-        cv2.putText(frame, f"Team 1 Ball Control: {team1_percent*100:.2f}%",(1400, 100), cv2.FONT_HERSHEY_COMPLEX, 1, (255,255,255), 3)
-        cv2.putText(frame, f"Team 2 Ball Control: {team2_percent*100:.2f}%",(1400, 150), cv2.FONT_HERSHEY_COMPLEX, 1, (255,255,255), 3)
+        cv2.putText(frame, f"Team 1 Ball Control: {team1_percent*100:.2f}%",(1560, 30), cv2.FONT_HERSHEY_COMPLEX, 0.7, (255,255,255), 2)
+        cv2.putText(frame, f"Team 2 Ball Control: {team2_percent*100:.2f}%",(1560, 60), cv2.FONT_HERSHEY_COMPLEX, 0.7, (255,255,255), 2)
 
         return frame
 

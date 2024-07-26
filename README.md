@@ -2,13 +2,8 @@
 
 Output video in /output folder
 
-<div align="center">
-<picture>
-  <source media="(prefers-color-scheme: light)" srcset="screenshot/ss1.png">
-   <img style="align-content:center" alt="openreads screen" src="screenshot/ss1.png" width="90%" height="90%">
-</picture>
-</div>
-<br>
+https://github.com/user-attachments/assets/d8b6499d-11fa-4a84-8122-71b5cee524d8
+
 <br>
 
 Features
@@ -77,5 +72,7 @@ Future works
 
 Acknowledgement
 -------
-The tutorial following in building this project - <br> 
+* The tutorial following in building this project - <br> 
 https://www.youtube.com/watch?v=7l5UgtWfnw0
+* Roboflow
+* Ultralytics

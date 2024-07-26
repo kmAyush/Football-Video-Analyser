@@ -13,7 +13,7 @@ Features
 * Display team ball control.
 * Display Camera motion.
 * Predicts player position
-* Display player speed and distance.
+* Display player id, speed and distance.
 <br>
 
 Methodology
@@ -68,6 +68,7 @@ Limitations
 Future works
 -------
 * Add player position in rectangle HUD of field.
+* Add function to predict goalkeeper by rejection and side of field.
 * Better representation of data.
 
 Acknowledgement

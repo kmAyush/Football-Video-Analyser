@@ -22,7 +22,7 @@ How to Run
 ```
 git clone https://github.com/kmAyush/Football_video_analyser.git
 ```
-2. Create a folder "models" and download this <a href = https://huggingface.co/Ayushkm10/Football_video_analyser/blob/main/best.pt>huggingface model</a> save it in that folder.<br>
+2. Create a folder "models" and download this <a href = https://huggingface.co/Ayushkm10/Football_video_analyser/blob/main/best.pt>model</a> save it in that folder.<br>
 3. Install dependencies 
 ```
 pip install -r requirements.txt
@@ -104,3 +104,4 @@ Acknowledgement
 https://www.youtube.com/watch?v=7l5UgtWfnw0
 * Roboflow
 * Ultralytics
+* Huggingface
